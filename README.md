@@ -1,4 +1,4 @@
-# Pretty_Logs
+# Pretty_Logging
 Nice looking logs for your Python projects.
 
 ##Pre-requisite
