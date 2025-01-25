@@ -9,6 +9,10 @@ Before using this module, make shure you have installed:
 ```bash
 git clone https://github.com/phobeiro/pretty_logging
 ```
+## Install dependencies
+```bash
+pip install -r requirements.txt
+```
 ## Configure environment
 You can customize your logs formating and dateformat in the Config class in config/config.py.
 
