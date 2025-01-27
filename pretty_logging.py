@@ -1,4 +1,5 @@
 from config import config
+from handlers import linebylinefilehandler, linebylinestreamhandler
 
 import logging
 from pathlib import Path
@@ -8,43 +9,6 @@ import pandas as pd
 
 
 c = config.Config
-
-class LineByLineFileHandler(logging.FileHandler):
-    def emit(self, record):
-        msg = self.format(record)
-        if isinstance(record.msg, pd.DataFrame):
-            record.msg = record.msg.to_string()
-
-        if isinstance(record.msg, str):
-            for line in record.msg.splitlines():
-                new_record = logging.LogRecord(
-                    record.name, record.levelno, record.pathname, record.lineno,
-                    line, record.args, record.exc_info, record.funcName
-                )
-                msg = self.format(new_record)
-                
-                super().emit(new_record)
-        else:
-            super().emit(record)
-
-
-class LineByLineStreamFileHandler(logging.StreamHandler):
-    def emit(self, record):
-        msg = self.format(record)
-        if isinstance(record.msg, pd.DataFrame):
-            record.msg = record.msg.to_string()
-
-        if isinstance(record.msg, str) or isinstance(record.msg, str):
-            for line in record.msg.splitlines():
-                new_record = logging.LogRecord(
-                    record.name, record.levelno, record.pathname, record.lineno,
-                    line, record.args, record.exc_info, record.funcName
-                )
-                msg = self.format(new_record)
-                
-                super().emit(new_record)
-        else:
-            super().emit(record)
 
 def pretty_logging(
         logger_name:str, 
@@ -67,7 +31,7 @@ def pretty_logging(
     if (handler == 'file') or (handler == 'both'):
         # file logging config
         file_path = Path(c.FILE_PATH)
-        f_handler = LineByLineFileHandler(file_path)
+        f_handler = linebylinefilehandler.LineByLineFileHandler(file_path)
         f_handler.terminator = terminator
         f_handler.setLevel(logging.INFO)
         f_handler.setFormatter(formater)
@@ -75,7 +39,7 @@ def pretty_logging(
 
     if (handler == 'stream') or (handler == 'both'):
         # stream logging config
-        s_handler = LineByLineStreamFileHandler()
+        s_handler = linebylinestreamhandler.LineByLineStreamHandler()
         s_handler.terminator = terminator
         s_handler.setLevel(logging.INFO)
         s_handler.setFormatter(formater)
