@@ -5,9 +5,6 @@ import logging
 from pathlib import Path
 from typing import Literal
 
-import pandas as pd
-
-
 c = config.Config
 
 def pretty_logging(

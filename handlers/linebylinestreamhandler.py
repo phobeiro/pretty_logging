@@ -1,4 +1,5 @@
-import import logging
+import logging
+import pandas as pd
 
 class LineByLineStreamHandler(logging.StreamHandler):
     def emit(self, record):

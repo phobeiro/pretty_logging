@@ -1,4 +1,5 @@
 import logging
+import pandas as pd
 
 class LineByLineFileHandler(logging.FileHandler):
     def emit(self, record):
