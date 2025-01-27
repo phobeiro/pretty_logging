@@ -3,7 +3,7 @@ Nice looking logs for your Python projects.
 
 ## Pre-requisite
 Before using this module, make shure you have installed:
-- Pyhon (at least 3.10)
+- Python (at least 3.10)
 
 ## Cloning repository
 ```bash
